@@ -25,9 +25,9 @@ IDLE:
 IDLE_LOOP:
 	rcall NO_BEEP
 	rcall NO_BEEP
-    lpm r21, Z+ ; ladda text med post increment (s� den g�r upp 1 index varje iteration)
+    lpm r21, Z+ 
     tst r21 ; ifall slutet p� text
-    breq END_IDLE ; ifall r16 �r zero �r Z flag 0, d� branchar vi
+    breq END_IDLE 
 
 	cpi r21, $20
 	breq PLAY_SPACE
