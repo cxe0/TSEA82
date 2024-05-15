@@ -1,10 +1,4 @@
-;
-; lab3.asm
-;
-; Created: 2024-04-26 12:56:35
-; Author : ferpe211
-;
-	.dseg
+.dseg
 .org SRAM_START
 TIME: .byte 4 ; time in BCD format
 POS: .byte 1 ; 7-seg position

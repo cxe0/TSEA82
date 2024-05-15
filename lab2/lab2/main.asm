@@ -1,11 +1,3 @@
-;
-; lab2.asm
-;
-; Created: 2024-04-15 15:08:00
-; Author : ferpe211
-;
-
-
 .equ T = 10
 .equ N = 150
 
@@ -33,9 +25,9 @@ IDLE:
 IDLE_LOOP:
 	rcall NO_BEEP
 	rcall NO_BEEP
-    lpm r21, Z+ ; ladda text med post increment (så den går upp 1 index varje iteration)
-    tst r21 ; ifall slutet på text
-    breq END_IDLE ; ifall r16 är zero är Z flag 0, då branchar vi
+    lpm r21, Z+ ; ladda text med post increment (sï¿½ den gï¿½r upp 1 index varje iteration)
+    tst r21 ; ifall slutet pï¿½ text
+    breq END_IDLE ; ifall r16 ï¿½r zero ï¿½r Z flag 0, dï¿½ branchar vi
 
 	cpi r21, $20
 	breq PLAY_SPACE
@@ -89,8 +81,8 @@ LOOKUP:
 	ldi ZH, HIGH(BTAB*2)
 	ldi ZL, LOW(BTAB*2)
 	; add r21 till ZL
-	; addera carry på ZH ifall wrap around 
-	; r0 är 0, om då ZL + r21 skapar en carry läggs den på när adc ZH, 0 (+ carry)
+	; addera carry pï¿½ ZH ifall wrap around 
+	; r0 ï¿½r 0, om dï¿½ ZL + r21 skapar en carry lï¿½ggs den pï¿½ nï¿½r adc ZH, 0 (+ carry)
 	add ZL, r21
 	adc ZH,zero
 	lpm r22, Z

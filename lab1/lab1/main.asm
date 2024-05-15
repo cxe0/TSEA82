@@ -1,13 +1,3 @@
-;
-; lab1.asm
-;
-; Created: 2024-04-08 14:36:27
-; Author : ferpe211
-; r16 temp setup
-; r18 time delay
-; r19, data read loop iteration
-; r21 key
-; r20 output
 .equ T_MS = 33;
 
 ldi r16,HIGH(RAMEND) ; set stack

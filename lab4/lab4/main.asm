@@ -81,7 +81,6 @@ SEED:	.byte	1	; Seed for Random
 
 
 START:
-;	;***			; sätt stackpekaren
 
 	ldi r16, HIGH(RAMEND)
 	out SPH, r16
@@ -94,12 +93,10 @@ RUN:
 	call	ERASE_VMEM
 	call	UPDATE
 
-;;*** 	Vänta en stund så inte spelet går för fort 	;***
 	ldi r18, GAME_SPEED
 	call DELAY
 
 
-;;*** 	Avgör om träff				 	;***
 	lds r16, POSX
 	lds r17, TPOSX
 	cp r16, r17
@@ -125,8 +122,6 @@ MUX:
 	push r17
 	push r18
 
-;;*** 	skriv rutin som handhar multiplexningen och ;***
-;;*** 	utskriften till diodmatrisen. Öka SEED.		;***
 	ldi ZH, HIGH(VMEM)
 	ldi ZL, LOW(VMEM)
 
@@ -173,10 +168,6 @@ NO_RESET:
 	; --- JOYSTICK Sense stick and update POSX, POSY
 	; --- Uses r16
 JOYSTICK:	
-;;*** 	skriv kod som ökar eller minskar POSX beroende 	;***
-;;*** 	på insignalen från A/D-omvandlaren i X-led...	;***
-
-;;*** 	...och samma för Y-led 				;***
 	PUSH_SREG
 JOY_X:
 	; X POS, PORTA0
@@ -249,10 +240,10 @@ ADC10_CONVERT:
 	out ADCSRA,r16 ; starta omvandling
 ADC10_WAIT:
 	in r16,ADCSRA
-	sbrc r16,ADSC ; om 0-ställd, klar
-	rjmp ADC10_WAIT ; annars vänta
-	in r16,ADCL ; obs, läs låg byte först
-	in r17,ADCH ; hög byte sedan
+	sbrc r16,ADSC ; om 0-stï¿½lld, klar
+	rjmp ADC10_WAIT ; annars vï¿½nta
+	in r16,ADCL ; obs, lï¿½s lï¿½g byte fï¿½rst
+	in r17,ADCH ; hï¿½g byte sedan
 	ret
 
 
@@ -301,11 +292,6 @@ SETBIT_END:
 	; --- Hardware init
 	; --- Uses r16
 HW_INIT:
-
-;*** 	Konfigurera hårdvara och MUX-avbrott enligt ;***
-;*** 	ditt elektriska schema. Konfigurera 		;***
-;*** 	flanktriggat avbrott på INT0 (PD2).			;***
-	
 	ser r16
 	out PORTD, r16
 
@@ -327,8 +313,6 @@ HW_INIT:
 	; ---------------------------------------
 	; --- WARM start. Set up a new game
 WARM:
-
-;*** 	Sätt startposition (POSX,POSY)=(0,2)		;***
 	ldi r16, 0
 	sts POSX, r16
 
@@ -341,10 +325,6 @@ WARM:
 
 	pop r16 ; x
 	pop r17 ; y
-
-
-;*** 	Sätt startposition (TPOSX,POSY)				;***
-
 
 	ldi ZH, HIGH(TPOSX)
 	ldi ZL, LOW(TPOSX)
@@ -410,8 +390,6 @@ NORMAL_Y:
 	; --- Clears VMEM..VMEM+4
 	
 ERASE_VMEM:
-
-;*** 	Radera videominnet						;***
 	ldi ZH, HIGH(VMEM)
 	ldi ZL, LOW(VMEM)
 
